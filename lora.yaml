@@ -42,7 +42,7 @@ config:
     model:
       name_or_path: /content/model
       is_flux: true
-    trigger_word: replace
+    trigger_word: d1al0g0n
 meta:
-  name: '[name]'
+  name: '[d1al0g0n]'
   version: '1.0'
