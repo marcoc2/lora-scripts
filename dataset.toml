@@ -1,0 +1,15 @@
+[general]
+shuffle_caption = false
+caption_extension = '.txt'
+keep_tokens = 1
+
+# This is a DreamBooth-style dataset
+[[datasets]]
+resolution = 1024
+batch_size = 1
+keep_tokens = 1
+
+  [[datasets.subsets]]
+  image_dir = 'C:\Apps\11_xandao char'
+  class_tokens = 'xandao char'
+  num_repeats = 1

@@ -1,29 +1,22 @@
 import os
 
-def rename_files_in_directory(directory, prefix):
-    # Formatos suportados para imagem e texto
-    supported_formats = ['.jpg', '.jpeg', '.png', '.webp', '.txt']
-
-    # Lista os arquivos suportados na pasta
-    files = sorted([f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and os.path.splitext(f)[1].lower() in supported_formats])
+def renomear_arquivos(pasta, prefixo, formatos, sufixo_inicial=1):
+    arquivos = sorted([f for f in os.listdir(pasta) if os.path.isfile(os.path.join(pasta, f)) and os.path.splitext(f)[1].lower() in formatos])
     
-    for i, file in enumerate(files, start=1):
-        file_name, file_extension = os.path.splitext(file)
-        suffix = f"{i:03d}"  # Sufixo no formato 001, 002, ..., 999
-        new_name = f"{prefix}_{suffix}{file_extension}"
-        old_path = os.path.join(directory, file)
-        new_path = os.path.join(directory, new_name)
+    for i, arquivo in enumerate(arquivos, start=sufixo_inicial):
+        nome, fmt = os.path.splitext(arquivo)
+        sufixo = f"{i:03d}"
+        novo_nome = f"{prefixo}_{sufixo}{fmt}"
+        caminho_antigo = os.path.join(pasta, arquivo)
+        caminho_novo = os.path.join(pasta, novo_nome)
+        
+        os.rename(caminho_antigo, caminho_novo)
+        print(f"Renomeado: {caminho_antigo} -> {caminho_novo}")
 
-        os.rename(old_path, new_path)
-        print(f"Renamed: {old_path} -> {new_path}")
+# Lista de formatos de arquivo (imagens + txt)
+formatos = ['.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff', '.webp', '.txt']
 
-# Exemplo de uso ao chamar o script diretamente:
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) < 3:
-        print("Usage: python rename.py <directory> <prefix>")
-    else:
-        directory = sys.argv[1]
-        prefix = sys.argv[2]
-        rename_files_in_directory(directory, prefix)
-
+# Exemplo de uso:
+pasta = "."
+prefixo = "xandao"
+renomear_arquivos(pasta, prefixo, formatos)
